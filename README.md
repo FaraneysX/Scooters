@@ -52,4 +52,4 @@
 - Удалить самокаты из системы.
 - Управление ценами и акциями на аренду самокатов.
 
-![image](https://github.com/FaraneysX/scooters/assets/123993059/e9c617bd-19ac-4153-9370-3c4bad18d42b)
+![image](https://github.com/FaraneysX/scooters/assets/123993059/3819899e-6145-45d7-af81-5a814e543a59)
