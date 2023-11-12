@@ -1,7 +1,7 @@
-using Scooters.WebAPI.IoC;
+п»їusing Scooters.WebAPI.IoC;
 using Scooters.WebAPI.Settings;
 
-// Создание объекта конфигурации на основе файла appsettings.json.
+// РЎРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° РєРѕРЅС„РёРіСѓСЂР°С†РёРё РЅР° РѕСЃРЅРѕРІРµ С„Р°Р№Р»Р° appsettings.json.
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false)
     .Build();
@@ -9,20 +9,20 @@ var configuration = new ConfigurationBuilder()
 var settings = ScootersSettingsReader.Read(configuration);
 var builder = WebApplication.CreateBuilder();
 
-// Регистрация контроллеров для обработки HTTP-запросов.
+// Р РµРіРёСЃС‚СЂР°С†РёСЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё HTTP-Р·Р°РїСЂРѕСЃРѕРІ.
 builder.Services.AddControllers();
 
 SerilogConfigurator.ConfigureService(builder);
 SwaggerConfigurator.ConfigureServices(builder.Services);
 
-// Построение объекта приложения.
+// РџРѕСЃС‚СЂРѕРµРЅРёРµ РѕР±СЉРµРєС‚Р° РїСЂРёР»РѕР¶РµРЅРёСЏ.
 var app = builder.Build();
 
 SerilogConfigurator.ConfigureApplication(app);
 SwaggerConfigurator.ConfigureApplication(app);
 
-// Включение промежуточных слоев для перенаправления HTTP-запросов
-// с HTTPS, аутентификации и обработки контроллеров.
+// Р’РєР»СЋС‡РµРЅРёРµ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹С… СЃР»РѕРµРІ РґР»СЏ РїРµСЂРµРЅР°РїСЂР°РІР»РµРЅРёСЏ HTTP-Р·Р°РїСЂРѕСЃРѕРІ
+// СЃ HTTPS, Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРё Рё РѕР±СЂР°Р±РѕС‚РєРё РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРІ.
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.MapControllers();
