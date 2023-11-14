@@ -1,5 +1,5 @@
-﻿using Scooters.WebAPI.IoC;
-using Scooters.WebAPI.Settings;
+﻿using Scooters.Service.IoC;
+using Scooters.Service.Settings;
 
 // Создание объекта конфигурации на основе файла appsettings.json.
 var configuration = new ConfigurationBuilder()
@@ -14,12 +14,14 @@ builder.Services.AddControllers();
 
 SerilogConfigurator.ConfigureService(builder);
 SwaggerConfigurator.ConfigureServices(builder.Services);
+DbContextConfigurator.ConfigureService(builder.Services, settings);
 
 // Построение объекта приложения.
 var app = builder.Build();
 
 SerilogConfigurator.ConfigureApplication(app);
 SwaggerConfigurator.ConfigureApplication(app);
+DbContextConfigurator.ConfigureApplication(app);
 
 // Включение промежуточных слоев для перенаправления HTTP-запросов
 // с HTTPS, аутентификации и обработки контроллеров.

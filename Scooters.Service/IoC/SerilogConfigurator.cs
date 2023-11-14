@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace Scooters.WebAPI.IoC
+namespace Scooters.Service.IoC
 {
     public class SerilogConfigurator
     {

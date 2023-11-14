@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scooters.WebAPI", "Scooters.WebAPI\Scooters.WebAPI.csproj", "{4BBA56B7-18E6-4733-8F48-074B15C08D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scooters.Service", "Scooters.Service\Scooters.Service.csproj", "{4BBA56B7-18E6-4733-8F48-074B15C08D86}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D5BE414-E689-4F7A-BC59-3FF859FE7BDB} = {3D5BE414-E689-4F7A-BC59-3FF859FE7BDB}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scooters.BL", "Scooters.BL\Scooters.BL.csproj", "{1B6393C6-05F2-4A8D-B455-3F6F1087C5E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scooters.BL", "Scooters.BL\Scooters.BL.csproj", "{1B6393C6-05F2-4A8D-B455-3F6F1087C5E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scooters.DataAccess", "Scooters.DataAccess\Scooters.DataAccess.csproj", "{3D5BE414-E689-4F7A-BC59-3FF859FE7BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scooters.DataAccess", "Scooters.DataAccess\Scooters.DataAccess.csproj", "{3D5BE414-E689-4F7A-BC59-3FF859FE7BDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scooters.UnitTests", "Scooters.UnitTests\Scooters.UnitTests.csproj", "{78063E3F-DACA-4AE6-9134-88015181BE6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +32,10 @@ Global
 		{3D5BE414-E689-4F7A-BC59-3FF859FE7BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D5BE414-E689-4F7A-BC59-3FF859FE7BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D5BE414-E689-4F7A-BC59-3FF859FE7BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78063E3F-DACA-4AE6-9134-88015181BE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78063E3F-DACA-4AE6-9134-88015181BE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78063E3F-DACA-4AE6-9134-88015181BE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78063E3F-DACA-4AE6-9134-88015181BE6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
