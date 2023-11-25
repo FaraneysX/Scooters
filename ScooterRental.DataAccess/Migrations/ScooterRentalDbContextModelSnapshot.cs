@@ -76,7 +76,7 @@ namespace ScooterRental.DataAccess.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime?>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("ExternalId")
@@ -125,7 +125,6 @@ namespace ScooterRental.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

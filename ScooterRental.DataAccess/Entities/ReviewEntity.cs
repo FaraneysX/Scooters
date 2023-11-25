@@ -6,7 +6,7 @@ namespace ScooterRental.DataAccess.Entities;
 [Table("reviews")]
 public class ReviewEntity : BaseEntity
 {
-    public string Text { get; set; }
+    public string? Text { get; set; }
 
     [Range(0, 5)]
     public int Rating { get; set; }

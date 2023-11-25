@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ScooterRental.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrations : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,7 +77,7 @@ namespace ScooterRental.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    End = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    End = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ExternalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -126,7 +125,7 @@ namespace ScooterRental.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     RentId = table.Column<int>(type: "int", nullable: false),
                     ExternalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),

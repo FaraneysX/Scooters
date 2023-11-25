@@ -12,8 +12,8 @@ using ScooterRental.DataAccess;
 namespace ScooterRental.DataAccess.Migrations
 {
     [DbContext(typeof(ScooterRentalDbContext))]
-    [Migration("20231125204658_Migrations")]
-    partial class Migrations
+    [Migration("20231125233845_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,7 +79,7 @@ namespace ScooterRental.DataAccess.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime?>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("ExternalId")
@@ -128,7 +128,6 @@ namespace ScooterRental.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

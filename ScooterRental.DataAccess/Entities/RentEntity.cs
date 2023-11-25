@@ -7,7 +7,7 @@ namespace ScooterRental.DataAccess.Entities;
 public class RentEntity : BaseEntity
 {
     public DateTime Start { get; set; }
-    public DateTime End { get; set; }
+    public DateTime? End { get; set; }
 
     [Range(0, double.MaxValue)]
     public double TotalPrice { get; set; }
