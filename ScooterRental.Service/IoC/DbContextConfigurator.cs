@@ -1,6 +1,7 @@
-﻿using ScooterRental.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+
+using ScooterRental.DataAccess;
 using ScooterRental.Service.Settings;
-using Microsoft.EntityFrameworkCore;
 
 namespace ScooterRental.Service.IoC;
 

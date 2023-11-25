@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 
-using Microsoft.EntityFrameworkCore;
-
 using ScooterRental.DataAccess;
 using ScooterRental.DataAccess.Entities;
 

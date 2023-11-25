@@ -1,17 +1,16 @@
-﻿using ScooterRental.DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+
+using ScooterRental.DataAccess.Entities;
 
 namespace ScooterRental.DataAccess;
 
-public class ScooterRentalDbContext : DbContext
+public class ScooterRentalDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<AdminEntity> Admins { get; set; }
     public DbSet<ScooterEntity> Scooters { get; set; }
     public DbSet<RentEntity> Rents { get; set; }
     public DbSet<ReviewEntity> Reviews { get; set; }
-
-    public ScooterRentalDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

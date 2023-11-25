@@ -21,18 +21,21 @@ public class RepositoryTestsBaseClass
             .Build();
 
         _settings = ScooterRentalSettingsReader.Read(configuration);
-        _serviceProvider = ConfigureServiceProvider();
+        _serviceProvider = ConfigureServiceProvider;
         _dbContextFactory = _serviceProvider.GetRequiredService<IDbContextFactory<ScooterRentalDbContext>>();
     }
 
-    private IServiceProvider ConfigureServiceProvider()
+    private IServiceProvider ConfigureServiceProvider
     {
-        var serviceCollection = new ServiceCollection();
+        get
+        {
+            var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddDbContextFactory<ScooterRentalDbContext>(
-            options => options.UseSqlServer(_settings.ScooterRentalDbContextConnectionString),
-            ServiceLifetime.Scoped);
+            serviceCollection.AddDbContextFactory<ScooterRentalDbContext>(
+                options => options.UseSqlServer(_settings.ScooterRentalDbContextConnectionString),
+                ServiceLifetime.Scoped);
 
-        return serviceCollection.BuildServiceProvider();
+            return serviceCollection.BuildServiceProvider();
+        }
     }
 }

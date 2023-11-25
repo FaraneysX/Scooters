@@ -1,18 +1,14 @@
 ﻿using System.Linq.Expressions;
 
-using ScooterRental.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+
+using ScooterRental.DataAccess.Entities;
 
 namespace ScooterRental.DataAccess;
 
-public class Repository<T> : IRepository<T> where T : BaseEntity
+public class Repository<T>(IDbContextFactory<ScooterRentalDbContext> contextFactory) : IRepository<T> where T : BaseEntity
 {
-    private readonly IDbContextFactory<ScooterRentalDbContext> _contextFactory;
-
-    public Repository(IDbContextFactory<ScooterRentalDbContext> contextFactory)
-    {
-        _contextFactory = contextFactory;
-    }
+    private readonly IDbContextFactory<ScooterRentalDbContext> _contextFactory = contextFactory;
 
     public IEnumerable<T> GetAll()
     {
