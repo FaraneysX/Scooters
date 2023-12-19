@@ -7,7 +7,7 @@ using ScooterRental.DataAccess.Entities;
 
 namespace ScooterRental.DataAccess.Repository;
 
-public class Repository<T>(IDbContextFactory<ScooterRentalDbContext> contextFactory) : IRepository<T> where T : BaseEntity
+public class Repository<T>(IDbContextFactory<ScooterRentalDbContext> contextFactory) : IRepository<T> where T : class, IBaseEntity
 {
     private readonly IDbContextFactory<ScooterRentalDbContext> _contextFactory = contextFactory;
 

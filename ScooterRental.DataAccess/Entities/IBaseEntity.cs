@@ -2,7 +2,7 @@
 
 namespace ScooterRental.DataAccess.Entities;
 
-public abstract class BaseEntity : IBaseEntity
+public interface IBaseEntity
 {
     [Key]
     public int Id { get; set; }
