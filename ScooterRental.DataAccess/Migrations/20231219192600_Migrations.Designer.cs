@@ -12,7 +12,7 @@ using ScooterRental.DataAccess;
 namespace ScooterRental.DataAccess.Migrations
 {
     [DbContext(typeof(ScooterRentalDbContext))]
-    [Migration("20231219191047_Migrations")]
+    [Migration("20231219192600_Migrations")]
     partial class Migrations
     {
         /// <inheritdoc />
