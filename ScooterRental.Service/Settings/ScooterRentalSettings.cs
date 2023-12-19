@@ -2,5 +2,5 @@
 
 public class ScooterRentalSettings
 {
-    public string ScooterRentalDbContextConnectionString { get; set; }
+    public string? ScooterRentalDbContextConnectionString { get; set; }
 }

@@ -33,34 +33,6 @@ namespace ScooterRental.DataAccess.Migrations
                     b.ToTable("RentEntityScooterEntity");
                 });
 
-            modelBuilder.Entity("ScooterRental.DataAccess.Entities.AdminEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ExternalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("admins");
-                });
-
             modelBuilder.Entity("ScooterRental.DataAccess.Entities.RentEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -84,7 +56,7 @@ namespace ScooterRental.DataAccess.Migrations
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("TotalPrice")
+                    b.Property<double?>("TotalPrice")
                         .HasColumnType("float");
 
                     b.Property<int>("UserId")
@@ -149,7 +121,6 @@ namespace ScooterRental.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModificationTime")
@@ -180,6 +151,9 @@ namespace ScooterRental.DataAccess.Migrations
 
                     b.Property<Guid>("ExternalId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ModificationTime")
                         .HasColumnType("datetime2");
@@ -220,17 +194,6 @@ namespace ScooterRental.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ScooterRental.DataAccess.Entities.AdminEntity", b =>
-                {
-                    b.HasOne("ScooterRental.DataAccess.Entities.UserEntity", "User")
-                        .WithOne("Admin")
-                        .HasForeignKey("ScooterRental.DataAccess.Entities.AdminEntity", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ScooterRental.DataAccess.Entities.RentEntity", b =>
                 {
                     b.HasOne("ScooterRental.DataAccess.Entities.UserEntity", "User")
@@ -260,8 +223,6 @@ namespace ScooterRental.DataAccess.Migrations
 
             modelBuilder.Entity("ScooterRental.DataAccess.Entities.UserEntity", b =>
                 {
-                    b.Navigation("Admin");
-
                     b.Navigation("Rents");
                 });
 #pragma warning restore 612, 618

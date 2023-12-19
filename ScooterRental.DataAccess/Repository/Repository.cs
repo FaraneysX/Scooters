@@ -1,10 +1,11 @@
 ﻿using System.Linq.Expressions;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using ScooterRental.DataAccess.Entities;
 
-namespace ScooterRental.DataAccess;
+namespace ScooterRental.DataAccess.Repository;
 
 public class Repository<T>(IDbContextFactory<ScooterRentalDbContext> contextFactory) : IRepository<T> where T : BaseEntity
 {
@@ -42,27 +43,26 @@ public class Repository<T>(IDbContextFactory<ScooterRentalDbContext> contextFact
     {
         using var context = _contextFactory.CreateDbContext();
 
+        EntityEntry<T>? result = null;
+
         if (context.Set<T>().Any(x => x.Id == entity.Id))
         {
             entity.ModificationTime = DateTime.UtcNow;
-            var result = context.Set<T>().Attach(entity);
+            result = context.Set<T>().Attach(entity);
 
             context.Entry(entity).State = EntityState.Modified;
-            context.SaveChanges();
-
-            return result.Entity;
         }
         else
         {
             entity.ExternalId = Guid.NewGuid();
             entity.CreationTime = DateTime.UtcNow;
             entity.ModificationTime = entity.CreationTime;
-            var result = context.Set<T>().Add(entity);
-
-            context.SaveChanges();
-
-            return result.Entity;
+            result = context.Set<T>().Add(entity);
         }
+
+        context.SaveChanges();
+
+        return result.Entity;
     }
 
     public void Delete(T entity)
@@ -71,6 +71,7 @@ public class Repository<T>(IDbContextFactory<ScooterRentalDbContext> contextFact
 
         context.Set<T>().Attach(entity);
         context.Entry(entity).State = EntityState.Deleted;
+
         context.SaveChanges();
     }
 }

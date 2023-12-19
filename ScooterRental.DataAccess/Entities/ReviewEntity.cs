@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScooterRental.DataAccess.Entities;
 
@@ -7,10 +6,7 @@ namespace ScooterRental.DataAccess.Entities;
 public class ReviewEntity : BaseEntity
 {
     public string? Text { get; set; }
-
-    [Range(0, 5)]
-    public int Rating { get; set; }
-
-    public int RentId { get; set; }
-    public RentEntity Rent { get; set; }
+    public required int Rating { get; set; }
+    public required int RentId { get; set; }
+    public required RentEntity Rent { get; set; }
 }

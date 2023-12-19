@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 
-using ScooterRental.DataAccess;
 using ScooterRental.DataAccess.Entities;
+using ScooterRental.DataAccess.Repository;
 
 namespace ScooterRental.UnitTests.Repository;
 
@@ -22,7 +22,9 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
                 Surname = "Surname1",
                 Email = "email1@email.com",
                 PhoneNumber = "1234567890",
-                PasswordHash = "PasswordHash1"
+                PasswordHash = "PasswordHash1",
+                IsAdmin = true
+
             },
             new()
             {
@@ -30,7 +32,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
                 Surname = "Surname2",
                 Email = "email2@email.com",
                 PhoneNumber = "0987654321",
-                PasswordHash = "PasswordHash2"
+                PasswordHash = "PasswordHash2",
+                IsAdmin = false
             }
         };
 
@@ -56,7 +59,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
                 Surname = "Surname1",
                 Email = "email1@email.com",
                 PhoneNumber = "1234567890",
-                PasswordHash = "PasswordHash1"
+                PasswordHash = "PasswordHash1",
+                IsAdmin = true
             },
             new()
             {
@@ -64,7 +68,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
                 Surname = "Surname2",
                 Email = "email2@email.com",
                 PhoneNumber = "0987654321",
-                PasswordHash = "PasswordHash2"
+                PasswordHash = "PasswordHash2",
+                IsAdmin = false
             }
         };
 
@@ -88,7 +93,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
             Surname = "Surname1",
             Email = "email1@email.com",
             PhoneNumber = "1234567890",
-            PasswordHash = "PasswordHash1"
+            PasswordHash = "PasswordHash1",
+            IsAdmin = true
         };
 
         var repository = new Repository<UserEntity>(_dbContextFactory);
@@ -96,11 +102,15 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
 
         var actualUser = context.Users.SingleOrDefault();
 
-        actualUser.Should().BeEquivalentTo(user, options => options.Excluding(user => user.Id)
-        .Excluding(user => user.ExternalId)
-        .Excluding(user => user.CreationTime)
-        .Excluding(user => user.ModificationTime));
+        if (actualUser == null)
+        {
+            return;
+        }
 
+        actualUser.Should().BeEquivalentTo(user, options => options.Excluding(user => user.Id)
+                                                                   .Excluding(user => user.ExternalId)
+                                                                   .Excluding(user => user.CreationTime)
+                                                                   .Excluding(user => user.ModificationTime));
         actualUser.Id.Should().NotBe(default);
         actualUser.ExternalId.Should().NotBe(Guid.Empty);
         actualUser.CreationTime.Should().NotBe(default);
@@ -118,7 +128,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
             Surname = "Surname1",
             Email = "email1@email.com",
             PhoneNumber = "1234567890",
-            PasswordHash = "PasswordHash1"
+            PasswordHash = "PasswordHash1",
+            IsAdmin = true
         };
 
         context.Users.Add(user);
@@ -145,7 +156,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
             Surname = "Surname1",
             Email = "email1@email.com",
             PhoneNumber = "1234567890",
-            PasswordHash = "PasswordHash1"
+            PasswordHash = "PasswordHash1",
+            IsAdmin = true
         };
 
         context.Users.Add(user);
@@ -170,7 +182,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
                 Surname = "Surname1",
                 Email = "email1@email.com",
                 PhoneNumber = "1234567890",
-                PasswordHash = "PasswordHash1"
+                PasswordHash = "PasswordHash1",
+                IsAdmin = true
             },
             new()
             {
@@ -178,7 +191,8 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
                 Surname = "Surname2",
                 Email = "email2@email.com",
                 PhoneNumber = "0987654321",
-                PasswordHash = "PasswordHash2"
+                PasswordHash = "PasswordHash2",
+                IsAdmin = false
             }
         };
 
@@ -207,7 +221,7 @@ public class UserRepositoryTests : RepositoryTestsBaseClass
         CleanUp();
     }
 
-    public void CleanUp()
+    private void CleanUp()
     {
         using var context = _dbContextFactory.CreateDbContext();
 

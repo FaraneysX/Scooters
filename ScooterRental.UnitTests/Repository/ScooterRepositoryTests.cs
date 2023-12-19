@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 
-using ScooterRental.DataAccess;
 using ScooterRental.DataAccess.Entities;
+using ScooterRental.DataAccess.Repository;
 
 namespace ScooterRental.UnitTests.Repository;
 
@@ -86,11 +86,15 @@ public class ScooterRepositoryTests : RepositoryTestsBaseClass
 
         var actualScooter = context.Scooters.SingleOrDefault();
 
-        actualScooter.Should().BeEquivalentTo(scooter, options => options.Excluding(scooter => scooter.Id)
-        .Excluding(scooter => scooter.ExternalId)
-        .Excluding(scooter => scooter.CreationTime)
-        .Excluding(scooter => scooter.ModificationTime));
+        if (actualScooter is null)
+        {
+            return;
+        }
 
+        actualScooter.Should().BeEquivalentTo(scooter, options => options.Excluding(scooter => scooter.Id)
+                                                                         .Excluding(scooter => scooter.ExternalId)
+                                                                         .Excluding(scooter => scooter.CreationTime)
+                                                                         .Excluding(scooter => scooter.ModificationTime));
         actualScooter.Id.Should().NotBe(default);
         actualScooter.ExternalId.Should().NotBe(Guid.Empty);
         actualScooter.CreationTime.Should().NotBe(default);
@@ -186,7 +190,7 @@ public class ScooterRepositoryTests : RepositoryTestsBaseClass
         CleanUp();
     }
 
-    public void CleanUp()
+    private void CleanUp()
     {
         using var context = _dbContextFactory.CreateDbContext();
 

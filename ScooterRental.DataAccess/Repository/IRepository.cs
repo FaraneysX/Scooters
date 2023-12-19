@@ -2,7 +2,7 @@
 
 using ScooterRental.DataAccess.Entities;
 
-namespace ScooterRental.DataAccess;
+namespace ScooterRental.DataAccess.Repository;
 
 public interface IRepository<T> where T : BaseEntity
 {
